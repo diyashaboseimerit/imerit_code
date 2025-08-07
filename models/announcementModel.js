@@ -1,12 +1,25 @@
 const db_iet = require('../config/mySqldb');
 
-const fetchData = function () {
+/**
+ * Fetches rows from 'mdl_enrol' based on status ('published' or 'draft').
+ * Expects: status from controller ('published' = 1, 'draft' = 0)
+ */
+const fetchData = function ({ status }) {
   return new Promise((resolve, reject) => {
-    db_iet.query('SELECT * FROM announcement')
+    let query = 'SELECT * FROM mdl_enrol';
+    let params = [];
+
+    if (status !== undefined) {
+      query += ' WHERE status = ?';
+      params.push(status);
+    }
+
+    db_iet.query(query, params)[1,'admin']
       .then(([rows]) => {
         return resolve({
           result: rows,
-          message: "Solved"
+          message: "Solved",
+          appcode: 50003
         });
       })
       .catch((err) => {
