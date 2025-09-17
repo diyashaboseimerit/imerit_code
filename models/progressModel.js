@@ -51,10 +51,10 @@ const fetchModelProgress = function ({ userid }) {
     END as time_completed
 
 
-FROM enrolments e
-INNER JOIN enrol en ON e.enrolid = en.id
-INNER JOIN courses c ON en.courseid = c.id
-LEFT JOIN course_completions cc ON e.userid = cc.userid AND c.id = cc.course
+FROM mdl_user_enrolments e
+INNER JOIN mdl_enrol en ON e.enrolid = en.id
+INNER JOIN mdl_course c ON en.courseid = c.id
+LEFT JOIN mdl_course_completions cc ON e.userid = cc.userid AND c.id = cc.course
 
 WHERE e.userid = ?
 ORDER BY e.timecreate DESC;
