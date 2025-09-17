@@ -17,16 +17,16 @@ SELECT
         WHEN cc.timecompleted IS NULL AND uca.timeaccess IS NOT NULL THEN 'In Progress'
         ELSE 'Not Started'
     END AS progress_status
-FROM courses c
-JOIN enrol e 
+FROM mdl_course c
+JOIN mdl_enrol e 
     ON e.courseid = c.id
-JOIN enrolments en 
+JOIN mdl_user_enrolments en 
     ON en.enrolid = e.id
-JOIN users_data u 
+JOIN mdl_user u 
     ON u.id = en.userid
-LEFT JOIN course_completions cc 
+LEFT JOIN mdl_course_completions cc 
     ON cc.course = c.id AND cc.userid = u.id
-LEFT JOIN user_course_access uca
+LEFT JOIN mdl_user_lastaccess uca
     ON uca.courseid = c.id AND uca.userid = u.id
 WHERE c.id = ?;
     `;
