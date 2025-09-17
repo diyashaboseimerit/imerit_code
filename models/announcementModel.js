@@ -6,7 +6,7 @@ const db_iet = require('../config/mySqldb');
  */
 const fetchData = function ({ status }) {
   return new Promise((resolve, reject) => {
-    let query = 'SELECT * FROM enrol';
+    let query = 'SELECT * FROM mdl_enrol';
     let params = [];
 
     if (status !== undefined) {
@@ -32,3 +32,4 @@ const fetchData = function ({ status }) {
 };
 
 module.exports = { fetchData };
+
